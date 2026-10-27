@@ -135,6 +135,7 @@
       }
 
       const suggestions = getSuggestions(role);
+      const actionPlan = createActionPlan(role, experience, location);
       const searchLocation =
         location === "Remote / international" ? "Remote" : location;
 
@@ -156,7 +157,7 @@
             </a>
           </article>
         `).join("")}
-      `;
+      ` + actionPlan;
     });
 
     function getSuggestions(role) {
@@ -226,6 +227,71 @@
       const query = title + " " + location;
       return "https://www.indeed.com/jobs?q=" + encodeURIComponent(query);
     }
+
+    
+function createActionPlan(role, experience, location) {
+  const safeRole = escapeHtml(role);
+  const safeExperience = escapeHtml(experience);
+  const safeLocation = escapeHtml(location);
+
+  return `
+    <section class="panel" style="margin-top:24px">
+      <h2>Your personalised job-search plan</h2>
+      <p>
+        Your starting point: <strong>${safeRole}</strong>,
+        <strong>${safeExperience}</strong> of experience,
+        looking in <strong>${safeLocation}</strong>.
+      </p>
+
+      <h3>Today — Get ready</h3>
+      <ul>
+        <li>Update your CV to highlight your strongest technical skills and achievements.</li>
+        <li>Update your LinkedIn profile and mark yourself open to relevant opportunities.</li>
+        <li>Choose three job titles to focus your search on.</li>
+      </ul>
+
+      <h3>This week — Start applying</h3>
+      <ul>
+        <li>Set up job alerts for your chosen roles and location.</li>
+        <li>Identify 10 suitable vacancies and prioritise those matching your experience.</li>
+        <li>Tailor your CV for each application rather than sending the same version everywhere.</li>
+        <li>Contact former colleagues and professional connections to ask about opportunities.</li>
+      </ul>
+
+      <h3>Next two weeks — Build momentum</h3>
+      <ul>
+        <li>Aim for a manageable number of well-matched applications each week.</li>
+        <li>Practise explaining your recent projects and the impact you delivered.</li>
+        <li>Prepare examples for technical interviews and problem-solving questions.</li>
+        <li>Review your progress weekly and adjust your search if you are not getting responses.</li>
+      </ul>
+
+      <h3>Your daily checklist</h3>
+      <label style="font-weight:normal">
+        <input type="checkbox" style="width:auto;margin-right:8px">
+        Find and review relevant vacancies
+      </label>
+      <label style="font-weight:normal">
+        <input type="checkbox" style="width:auto;margin-right:8px">
+        Complete one useful application
+      </label>
+      <label style="font-weight:normal">
+        <input type="checkbox" style="width:auto;margin-right:8px">
+        Contact one professional connection
+      </label>
+      <label style="font-weight:normal">
+        <input type="checkbox" style="width:auto;margin-right:8px">
+        Spend 20 minutes preparing for interviews
+      </label>
+
+      <p class="note">
+        This plan is a starting point, not a guarantee of employment.
+        Your checklist resets when you refresh the page.
+      </p>
+    </section>
+  `;
+}
+
 
     function escapeHtml(value) {
       return value.replace(/[&<>"']/g, function (char) {
