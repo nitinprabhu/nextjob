@@ -325,12 +325,142 @@ input[type="checkbox"] {
   }
 }
 
+.welcome {
+  padding: 42px 34px;
+  margin-bottom: 28px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #14213d 0%, #233f78 65%, #3867f4 100%);
+  color: #ffffff;
+  box-shadow: 0 16px 40px #14213d24;
+}
+
+.welcome-label {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #c7d6ff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.welcome h1 {
+  max-width: 660px;
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.16;
+  letter-spacing: -1.2px;
+}
+
+.welcome > p {
+  max-width: 620px;
+  color: #e0e8ff;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.welcome-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.welcome-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 18px;
+  border: 1px solid #ffffff50;
+  border-radius: 9px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.welcome-button:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.welcome-button.primary {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #203b78;
+}
+
+.welcome-button.primary:hover {
+  background: #edf2ff;
+}
+
+.welcome-button.secondary {
+  background: #ffffff12;
+}
+
+.welcome-button.secondary:hover {
+  background: #ffffff25;
+}
+
+.welcome-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-top: 28px;
+  color: #e0e8ff;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .welcome {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .welcome-actions {
+    flex-direction: column;
+  }
+
+  .welcome-button {
+    width: 100%;
+  }
+
+  .welcome-points {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+
   </style>
 </head>
 <body>
   <header><div class="logo">NextJob</div></header>
 
   <main>
+
+<section class="welcome">
+  <span class="welcome-label">YOUR NEXT CHAPTER STARTS HERE</span>
+  <h1>You've got skills.<br>Let's find your next opportunity.</h1>
+  <p>
+    Take the next step in your technology career with practical job
+    search tools, CV matching and an application tracker — all in one place.
+  </p>
+
+  <div class="welcome-actions">
+    <a class="welcome-button primary" href="#jobForm">Find jobs</a>
+    <a class="welcome-button secondary" href="#cvText">Match my CV</a>
+    <a class="welcome-button secondary" href="#applicationForm">Track applications</a>
+  </div>
+
+  <div class="welcome-points">
+    <span>✓ Free to use</span>
+    <span>✓ No account required</span>
+    <span>✓ CV matching in your browser</span>
+  </div>
+</section>
+
     <section class="panel">
       <h1>Find your next opportunity</h1>
 
