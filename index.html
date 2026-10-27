@@ -6,75 +6,325 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextJob — Find Your Next Opportunity</title>
   <style>
-    * { box-sizing: border-box; }
+    
+:root {
+  --navy: #14213d;
+  --blue: #3867f4;
+  --blue-dark: #254bc5;
+  --ink: #202b40;
+  --muted: #69758b;
+  --surface: #ffffff;
+  --background: #f5f7fc;
+  --border: #e5eaf3;
+  --green: #176b43;
+  --radius: 18px;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      background: white;
-      padding: 20px 8%;
-      border-bottom: 1px solid #e5eaf2;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    .logo { color: #1769e0; font-size: 26px; font-weight: bold; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 0%, #e4ecff 0, transparent 35%),
+    var(--background);
+  color: var(--ink);
+  line-height: 1.65;
+}
 
-    main { max-width: 760px; margin: 45px auto; padding: 20px; }
+header {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--border);
+  padding: 18px max(24px, calc((100% - 1080px) / 2));
+}
 
-    .panel {
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 5px 24px #1720330d;
-    }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--navy);
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
 
-    h1 { font-size: 32px; margin-top: 0; }
-    .intro { color: #5b6578; line-height: 1.6; }
+.logo::before {
+  content: "N";
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3867f4, #6c8cff);
+  color: white;
+  font-size: 22px;
+  letter-spacing: 0;
+  box-shadow: 0 5px 12px #3867f433;
+}
 
-    label { display: block; margin-top: 20px; font-weight: bold; }
+main {
+  max-width: 860px;
+  margin: 48px auto 80px;
+  padding: 0 22px;
+}
 
-    input, select {
-      width: 100%;
-      margin-top: 8px;
-      padding: 13px;
-      border: 1px solid #ccd4e0;
-      border-radius: 7px;
-      font-size: 16px;
-      background: white;
-    }
+.panel {
+  background: var(--surface);
+  padding: 34px;
+  border: 1px solid #e8edf6;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px #23365a0c;
+  margin-bottom: 24px;
+}
 
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 15px;
-      border: 0;
-      border-radius: 7px;
-      background: #1769e0;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+h1,
+h2,
+h3,
+h4 {
+  color: var(--navy);
+  line-height: 1.25;
+  letter-spacing: -0.45px;
+}
 
-    button:hover { background: #1054b9; }
+h1 {
+  font-size: clamp(30px, 5vw, 43px);
+  letter-spacing: -1.5px;
+  line-height: 1.12;
+  margin: 0 0 18px;
+}
 
-    #results { margin-top: 30px; }
-    .job {
-      border: 1px solid #e0e6ef;
-      border-radius: 9px;
-      padding: 18px;
-      margin-top: 12px;
-    }
+h2 {
+  font-size: 25px;
+  margin-top: 0;
+}
 
-    .job h3 { margin: 0 0 8px; }
-    .job p { color: #5b6578; }
-    .job a { color: #1769e0; font-weight: bold; }
+h3 {
+  font-size: 18px;
+  margin-top: 26px;
+}
 
-    .note { font-size: 13px; color: #697386; margin-top: 22px; }
+h4 {
+  font-size: 16px;
+  margin-top: 22px;
+}
+
+p {
+  margin-top: 10px;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+label {
+  display: block;
+  margin-top: 22px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+input:not([type="checkbox"]),
+select,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 9px;
+  padding: 14px 15px;
+  border: 1px solid #d9e0ec;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px #3867f41c;
+}
+
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), #527bff);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px #3867f42b;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  box-shadow: 0 9px 20px #3867f438;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+a {
+  color: var(--blue-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--blue);
+}
+
+.job {
+  padding: 22px;
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: #fbfcff;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.job:hover {
+  border-color: #b8c9ff;
+  transform: translateY(-2px);
+}
+
+.job h3 {
+  margin: 0 0 8px;
+}
+
+.job p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.job a {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.privacy-notice {
+  padding: 20px;
+  margin: 24px 0;
+  border: 1px solid #b9e4cc;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #effaf3, #f7fcf8);
+  color: #28563b;
+  line-height: 1.75;
+}
+
+.privacy-notice h3 {
+  margin-top: 0;
+  color: #205a38;
+}
+
+.privacy-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 22px;
+}
+
+#results,
+#matchResults {
+  margin-top: 28px;
+}
+
+#results h2,
+#matchResults h3 {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+#results ul,
+#matchResults ul {
+  padding-left: 24px;
+}
+
+#results li,
+#matchResults li {
+  margin: 8px 0;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  main {
+    margin: 26px auto 48px;
+    padding: 0 14px;
+  }
+
+  .panel {
+    padding: 22px 18px;
+    border-radius: 15px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .job {
+    padding: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -83,6 +333,26 @@
   <main>
     <section class="panel">
       <h1>Find your next opportunity</h1>
+
+<div class="privacy-notice">
+  <h3>🔒 Your privacy matters</h3>
+  <p>
+    <strong>Your CV stays in your browser.</strong>
+    The planned CV matching feature will process your CV text
+    and job description locally on your device.
+  </p>
+  <p>
+    NextJob is designed not to save or send this text to a
+    NextJob server or an AI service. Your information will not
+    be stored by NextJob.
+  </p>
+  <p>
+    Your browser and external websites may still collect
+    technical information. Avoid including sensitive personal
+    information you do not need for matching.
+  </p>
+</div>
+
       <p class="intro">
         Tell us about your experience. We'll suggest job titles and help
         you find relevant vacancies.
@@ -116,6 +386,42 @@
         are determined by the job websites.
       </p>
     </section>
+
+<section class="panel" style="margin-top:24px">
+  <h2>CV-to-job matcher</h2>
+  <p class="intro">
+    Compare your CV with a job description to identify matching
+    and missing technology skills.
+  </p>
+
+  <div class="privacy-notice">
+    <strong>🔒 Your text stays in this page.</strong>
+    <p>
+      Matching runs locally in your browser. NextJob does not
+      upload or store the CV or job description. The results
+      disappear when you refresh the page.
+    </p>
+    <p>
+      This feature checks recognised keywords only. It does not
+      assess your full experience or guarantee job suitability.
+    </p>
+  </div>
+
+  <label for="cvText">Paste your CV text or technical skills</label>
+  <textarea id="cvText" rows="7"
+    placeholder="Example: Java, Spring Boot, REST APIs, PostgreSQL, AWS"
+    style="width:100%;margin-top:8px;padding:12px;border:1px solid #ccd4e0;border-radius:7px;font:inherit"></textarea>
+
+  <label for="jobText">Paste the job description</label>
+  <textarea id="jobText" rows="7"
+    placeholder="Paste the responsibilities and required skills from the job advert"
+    style="width:100%;margin-top:8px;padding:12px;border:1px solid #ccd4e0;border-radius:7px;font:inherit"></textarea>
+
+  <button type="button" id="matchButton">Compare My CV</button>
+
+  <div id="matchResults" aria-live="polite"></div>
+</section>
+
   </main>
 
   <script>
@@ -292,6 +598,85 @@ function createActionPlan(role, experience, location) {
   `;
 }
 
+
+
+const recognisedSkills = [
+  "JavaScript", "TypeScript", "Java", "Python", "C#", "C++",
+  "Spring Boot", "Spring", "Node.js", "React", "Angular", "Vue",
+  "HTML", "CSS", "REST API", "GraphQL", "Microservices",
+  "PostgreSQL", "MySQL", "MongoDB", "Redis", "SQL",
+  "AWS", "Azure", "Google Cloud", "Docker", "Kubernetes",
+  "Terraform", "Git", "GitHub Actions", "Jenkins",
+  "CI/CD", "Linux", "Kafka", "RabbitMQ", "Maven", "Gradle",
+  "JUnit", "Mockito", "Selenium", "Cypress", "Playwright",
+  "Agile", "Scrum", "Machine Learning", "Generative AI",
+  "Large Language Models", "LLM", "RAG", "Vector Database",
+  "pgvector", "OpenAI", "Ollama"
+];
+
+document.getElementById("matchButton").addEventListener("click", function () {
+  const cv = document.getElementById("cvText").value.trim();
+  const job = document.getElementById("jobText").value.trim();
+  const output = document.getElementById("matchResults");
+
+  if (!cv || !job) {
+    output.innerHTML = "<p>Please enter both your CV text and the job description.</p>";
+    return;
+  }
+
+  const cvLower = cv.toLowerCase();
+  const jobLower = job.toLowerCase();
+
+  const jobSkills = recognisedSkills.filter(skill =>
+    containsSkill(jobLower, skill)
+  );
+
+  const cvSkills = recognisedSkills.filter(skill =>
+    containsSkill(cvLower, skill)
+  );
+
+  const matched = jobSkills.filter(skill => cvSkills.includes(skill));
+  const missing = jobSkills.filter(skill => !cvSkills.includes(skill));
+
+  const score = jobSkills.length
+    ? Math.round((matched.length / jobSkills.length) * 100)
+    : null;
+
+  output.innerHTML = `
+    <h3>Comparison results</h3>
+    ${
+      score === null
+        ? "<p>No recognised technology skills were found in the job description. Try including its technical requirements.</p>"
+        : `
+          <p><strong>Keyword match: ${score}%</strong></p>
+          <p>${matched.length} of ${jobSkills.length} recognised job skills also appear in your CV.</p>
+          <p>This is a keyword overlap score, not a probability of getting the job.</p>
+          <h4>Matching skills</h4>
+          ${
+            matched.length
+              ? "<ul>" + matched.map(skill => `<li>${escapeHtml(skill)}</li>`).join("") + "</ul>"
+              : "<p>No recognised matching skills found.</p>"
+          }
+          <h4>Skills to review</h4>
+          ${
+            missing.length
+              ? "<ul>" + missing.map(skill => `<li>${escapeHtml(skill)}</li>`).join("") + "</ul>"
+              : "<p>No missing recognised skills found.</p>"
+          }
+          <p class="note">A skill listed as missing may simply be described differently in your CV. Only include skills you genuinely have.</p>
+        `
+    }
+  `;
+});
+
+function containsSkill(text, skill) {
+  const escaped = skill.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(
+    "(^|[^a-z0-9+#.])" + escaped + "($|[^a-z0-9+#.])",
+    "i"
+  );
+  return pattern.test(text);
+}
 
     function escapeHtml(value) {
       return value.replace(/[&<>"']/g, function (char) {
