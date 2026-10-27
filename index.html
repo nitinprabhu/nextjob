@@ -707,10 +707,21 @@ input[type="checkbox"] {
       ];
     }
 
-    function makeSearchUrl(title, location) {
-      const query = title + " " + location;
-      return "https://www.indeed.com/jobs?q=" + encodeURIComponent(query);
-    }
+    
+function makeSearchUrl(title, location) {
+  const query = encodeURIComponent(title);
+
+  if (location === "United Kingdom") {
+    return `https://uk.indeed.com/jobs?q=${query}`;
+  }
+
+  if (location === "United States") {
+    return `https://www.indeed.com/jobs?q=${query}`;
+  }
+
+  return `https://www.indeed.com/worldwide?q=${query}`;
+}
+
 
     
 function createActionPlan(role, experience, location) {
