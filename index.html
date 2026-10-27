@@ -433,6 +433,89 @@ input[type="checkbox"] {
 }
 
 
+/* About NextJob section */
+.about-nextjob {
+  max-width: 1060px;
+  margin: 48px auto;
+  padding: 40px 28px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(30, 58, 95, 0.06);
+  color: #17233f;
+}
+
+.about-nextjob h2 {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 30px;
+  color: #17233f;
+}
+
+.about-nextjob > p {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  text-align: center;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 28px 0;
+}
+
+.about-features > div {
+  padding: 24px;
+  background: #f8faff;
+  border: 1px solid #e5eaf4;
+  border-radius: 14px;
+}
+
+.about-features h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #2457c5;
+}
+
+.about-features p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.about-nextjob .about-privacy {
+  margin: 28px 0 0;
+  padding: 18px 20px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  color: #334155;
+  text-align: left;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .about-nextjob {
+    margin: 28px 16px;
+    padding: 28px 18px;
+  }
+
+  .about-nextjob h2 {
+    font-size: 25px;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -627,6 +710,41 @@ input[type="checkbox"] {
 </section>
 
   </main>
+
+<section class="about-nextjob">
+  <h2>About NextJob</h2>
+
+  <p>
+    NextJob helps people affected by technology-sector layoffs
+    explore new opportunities and plan their next career move.
+  </p>
+
+  <div class="about-features">
+    <div>
+      <h3>Explore opportunities</h3>
+      <p>Discover related job roles and find relevant vacancies.</p>
+    </div>
+
+    <div>
+      <h3>Improve your CV</h3>
+      <p>Compare CV text with a job description to identify
+      matching skills and areas to develop.</p>
+    </div>
+
+    <div>
+      <h3>Stay organised</h3>
+      <p>Keep track of applications, interviews and follow-ups.</p>
+    </div>
+  </div>
+
+  <p class="about-privacy">
+    <strong>Your CV matters.</strong>
+    The CV matcher processes the text you enter in your browser.
+    NextJob's matcher does not send that text to a server or AI API.
+    Avoid entering sensitive personal information.
+  </p>
+</section>
+
 
   <script>
     const form = document.getElementById("jobForm");
@@ -1012,7 +1130,7 @@ applicationList.addEventListener("click", function (event) {
         }[char];
       });
     }
-    
+
 const careerPaths = {
   developer: {
     title: "Software Developer",
