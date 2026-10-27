@@ -644,68 +644,106 @@ input[type="checkbox"] {
       ` + actionPlan;
     });
 
-    function getSuggestions(role) {
-      const r = role.toLowerCase();
+    
+function getSuggestions(role) {
+  const r = role.toLowerCase();
 
-      if (r.includes("software developer") || r.includes("software engineer")
-          || r.includes("programmer")) {
-        return [
-          "Software Developer",
-          "Software Engineer",
-          "Backend Developer",
-          "Full Stack Developer",
-          "Technical Lead"
-        ];
-      }
+  if (r.includes("software developer")
+      || r.includes("software engineer")
+      || r.includes("programmer")) {
+    return [
+      "Software Developer",
+      "Software Engineer",
+      "Backend Developer",
+      "Java Developer",
+      "Full Stack Developer",
+      "Frontend Developer",
+      "Cloud Engineer",
+      "AI Engineer",
+      "Technical Lead"
+    ];
+  }
 
-      if (r.includes("business analyst")) {
-        return [
-          "Business Analyst",
-          "Senior Business Analyst",
-          "Product Analyst",
-          "Systems Analyst",
-          "Product Owner"
-        ];
-      }
+  if (r.includes("business analyst")) {
+    return [
+      "Business Analyst",
+      "Senior Business Analyst",
+      "Technical Business Analyst",
+      "Product Analyst",
+      "Systems Analyst",
+      "Product Owner",
+      "Scrum Master"
+    ];
+  }
 
-      if (r.includes("test") || r.includes("qa") || r.includes("quality")) {
-        return [
-          "QA Engineer",
-          "Software Test Engineer",
-          "Automation Test Engineer",
-          "Test Lead",
-          "Quality Engineering Lead"
-        ];
-      }
+  if (r.includes("test") || r.includes("qa")
+      || r.includes("quality")) {
+    return [
+      "QA Engineer",
+      "Software Test Engineer",
+      "Automation Test Engineer",
+      "SDET",
+      "Performance Test Engineer",
+      "Test Lead",
+      "Quality Engineering Lead"
+    ];
+  }
 
-      if (r.includes("architect")) {
-        return [
-          "Solution Architect",
-          "Technical Architect",
-          "Software Architect",
-          "Cloud Architect",
-          "Principal Engineer"
-        ];
-      }
+  if (r.includes("architect")) {
+    return [
+      "Solution Architect",
+      "Technical Architect",
+      "Software Architect",
+      "Cloud Architect",
+      "Enterprise Architect",
+      "AI Architect",
+      "Principal Engineer"
+    ];
+  }
 
-      if (r.includes("project manager")) {
-        return [
-          "Project Manager",
-          "Technical Project Manager",
-          "Programme Manager",
-          "Delivery Manager",
-          "Scrum Master"
-        ];
-      }
+  if (r.includes("project manager")) {
+    return [
+      "Project Manager",
+      "Technical Project Manager",
+      "Programme Manager",
+      "Delivery Manager",
+      "Scrum Master",
+      "Agile Delivery Manager",
+      "Product Manager"
+    ];
+  }
 
-      return [
-        role,
-        "Senior " + role,
-        role + " Consultant",
-        "Team Lead",
-        "Related Specialist"
-      ];
-    }
+  if (r.includes("devops") || r.includes("platform")) {
+    return [
+      "DevOps Engineer",
+      "Platform Engineer",
+      "Site Reliability Engineer",
+      "Cloud Engineer",
+      "Infrastructure Engineer",
+      "Cloud Architect"
+    ];
+  }
+
+  if (r.includes("data")) {
+    return [
+      "Data Analyst",
+      "Data Engineer",
+      "Data Scientist",
+      "Analytics Engineer",
+      "Machine Learning Engineer",
+      "AI Engineer"
+    ];
+  }
+
+  return [
+    role,
+    "Senior " + role,
+    role + " Consultant",
+    "Team Lead",
+    "Related Specialist"
+  ];
+}
+
 
     
 function makeSearchUrl(title, location) {
