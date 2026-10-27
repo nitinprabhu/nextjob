@@ -422,6 +422,54 @@ input[type="checkbox"] {
   <div id="matchResults" aria-live="polite"></div>
 </section>
 
+
+<section class="panel" style="margin-top:24px">
+  <h2>My job application tracker</h2>
+  <p class="intro">
+    Keep track of the opportunities you're pursuing and your next steps.
+    Entries stay in this page while it remains open.
+  </p>
+
+  <div class="privacy-notice">
+    <strong>🔒 Private by design</strong>
+    <p>
+      Tracker entries are held in page memory and are not saved by NextJob.
+      Refreshing or closing the page clears them.
+    </p>
+  </div>
+
+  <form id="applicationForm">
+    <label for="companyName">Company name</label>
+    <input id="companyName" required placeholder="e.g. Example Technology Ltd">
+
+    <label for="jobTitle">Job title</label>
+    <input id="jobTitle" required placeholder="e.g. Software Engineer">
+
+    <label for="applicationDate">Application date</label>
+    <input id="applicationDate" type="date" required>
+
+    <label for="applicationStatus">Status</label>
+    <select id="applicationStatus">
+      <option>Interested</option>
+      <option>Applied</option>
+      <option>Interview</option>
+      <option>Offer</option>
+      <option>Rejected</option>
+    </select>
+
+    <label for="applicationNotes">Notes / next action</label>
+    <textarea id="applicationNotes" rows="3"
+      placeholder="e.g. Follow up next Tuesday"></textarea>
+
+    <button type="submit">Add Application</button>
+  </form>
+
+  <div id="applicationList" aria-live="polite" style="margin-top:28px">
+    <h3>Your applications</h3>
+    <p class="note">No applications added yet.</p>
+  </div>
+</section>
+
   </main>
 
   <script>
@@ -677,6 +725,76 @@ function containsSkill(text, skill) {
   );
   return pattern.test(text);
 }
+
+
+const applications = [];
+
+const applicationForm = document.getElementById("applicationForm");
+const applicationList = document.getElementById("applicationList");
+
+applicationForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const application = {
+    company: document.getElementById("companyName").value.trim(),
+    title: document.getElementById("jobTitle").value.trim(),
+    date: document.getElementById("applicationDate").value,
+    status: document.getElementById("applicationStatus").value,
+    notes: document.getElementById("applicationNotes").value.trim()
+  };
+
+  if (!application.company || !application.title || !application.date) {
+    return;
+  }
+
+  applications.push(application);
+  renderApplications();
+
+  applicationForm.reset();
+});
+
+function renderApplications() {
+  if (applications.length === 0) {
+    applicationList.innerHTML = `
+      <h3>Your applications</h3>
+      <p class="note">No applications added yet.</p>
+    `;
+    return;
+  }
+
+  applicationList.innerHTML = `
+    <h3>Your applications (${applications.length})</h3>
+    ${applications.map((app, index) => `
+      <article class="job">
+        <h3>${escapeHtml(app.title)}</h3>
+        <p><strong>Company:</strong> ${escapeHtml(app.company)}</p>
+        <p><strong>Date:</strong> ${escapeHtml(app.date)}</p>
+        <p><strong>Status:</strong> ${escapeHtml(app.status)}</p>
+        ${
+          app.notes
+            ? `<p><strong>Next action / notes:</strong> ${escapeHtml(app.notes)}</p>`
+            : ""
+        }
+        <button type="button" data-remove-application="${index}">
+          Remove application
+        </button>
+      </article>
+    `).join("")}
+  `;
+}
+
+applicationList.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-remove-application]");
+  if (!button) return;
+
+  const index = Number(button.dataset.removeApplication);
+  if (!Number.isInteger(index) || index < 0 || index >= applications.length) {
+    return;
+  }
+
+  applications.splice(index, 1);
+  renderApplications();
+});
 
     function escapeHtml(value) {
       return value.replace(/[&<>"']/g, function (char) {
