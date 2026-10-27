@@ -1075,6 +1075,7 @@ const careerPaths = {
   }
 };
 
+
 document.getElementById("careerButton").addEventListener("click", function () {
   const selected = document.getElementById("currentCareer").value;
   const results = document.getElementById("careerResults");
@@ -1094,19 +1095,30 @@ document.getElementById("careerButton").addEventListener("click", function () {
 
   const description = document.createElement("p");
   description.textContent =
-    "Consider these related roles when planning your next move:";
+    "Explore these related roles and find current vacancies:";
   results.appendChild(description);
 
   const list = document.createElement("ul");
 
   career.roles.forEach(function (role) {
     const item = document.createElement("li");
-    item.textContent = role;
+    const link = document.createElement("a");
+
+    link.textContent = "Find jobs for " + role;
+    link.href = makeSearchUrl(
+      role,
+      document.getElementById("location").value
+    );
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    item.appendChild(link);
     list.appendChild(item);
   });
 
   results.appendChild(list);
 });
+
 
   </script>
 </body>
