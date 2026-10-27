@@ -461,6 +461,32 @@ input[type="checkbox"] {
   </div>
 </section>
 
+<section class="career-change">
+  <h2>Explore Your Next Career</h2>
+  <p>
+    Your existing skills can open doors to new opportunities.
+    Choose your current role to explore related careers.
+  </p>
+
+  <label for="currentCareer">Your current role</label>
+  <select id="currentCareer">
+    <option value="">Choose your current role</option>
+    <option value="developer">Software Developer</option>
+    <option value="qa">QA Engineer / Tester</option>
+    <option value="analyst">Business Analyst</option>
+    <option value="architect">Technical Architect</option>
+    <option value="project">Project Manager</option>
+    <option value="devops">DevOps Engineer</option>
+  </select>
+
+  <button type="button" id="careerButton">
+    Explore career options
+  </button>
+
+  <div id="careerResults" aria-live="polite"></div>
+</section>
+
+
     <section class="panel">
       <h1>Find your next opportunity</h1>
 
@@ -986,6 +1012,102 @@ applicationList.addEventListener("click", function (event) {
         }[char];
       });
     }
+    
+const careerPaths = {
+  developer: {
+    title: "Software Developer",
+    roles: [
+      "Backend Developer",
+      "Cloud Engineer",
+      "DevOps Engineer",
+      "AI Engineer",
+      "Technical Lead"
+    ]
+  },
+  qa: {
+    title: "QA Engineer / Tester",
+    roles: [
+      "Automation Engineer",
+      "Software Development Engineer in Test (SDET)",
+      "Performance Test Engineer",
+      "Quality Engineering Lead"
+    ]
+  },
+  analyst: {
+    title: "Business Analyst",
+    roles: [
+      "Product Owner",
+      "Product Analyst",
+      "Systems Analyst",
+      "Delivery Manager",
+      "Product Manager"
+    ]
+  },
+  architect: {
+    title: "Technical Architect",
+    roles: [
+      "Cloud Architect",
+      "AI Architect",
+      "Enterprise Architect",
+      "Principal Engineer",
+      "Engineering Lead"
+    ]
+  },
+  project: {
+    title: "Project Manager",
+    roles: [
+      "Technical Project Manager",
+      "Delivery Manager",
+      "Programme Manager",
+      "Scrum Master",
+      "Product Manager"
+    ]
+  },
+  devops: {
+    title: "DevOps Engineer",
+    roles: [
+      "Platform Engineer",
+      "Cloud Engineer",
+      "Site Reliability Engineer",
+      "Infrastructure Engineer",
+      "Cloud Architect"
+    ]
+  }
+};
+
+document.getElementById("careerButton").addEventListener("click", function () {
+  const selected = document.getElementById("currentCareer").value;
+  const results = document.getElementById("careerResults");
+
+  results.replaceChildren();
+
+  if (!selected) {
+    results.textContent = "Please choose your current role first.";
+    return;
+  }
+
+  const career = careerPaths[selected];
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Career options for " + career.title;
+  results.appendChild(heading);
+
+  const description = document.createElement("p");
+  description.textContent =
+    "Consider these related roles when planning your next move:";
+  results.appendChild(description);
+
+  const list = document.createElement("ul");
+
+  career.roles.forEach(function (role) {
+    const item = document.createElement("li");
+    item.textContent = role;
+    list.appendChild(item);
+  });
+
+  results.appendChild(list);
+});
+
   </script>
 </body>
 </html>
